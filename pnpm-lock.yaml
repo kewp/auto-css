@@ -1,0 +1,13 @@
+lockfileVersion: 5.3
+
+specifiers:
+  '@autolib/auto': ^1.34.36
+
+dependencies:
+  '@autolib/auto': 1.34.36
+
+packages:
+
+  /@autolib/auto/1.34.36:
+    resolution: {integrity: sha512-h1ImhNFnfXxRK8qi0A4QoT060RSN9xi1r245bPZ8UmWhxueo1vhQbYMS4dMIq9fPxLebXnY8P1DvRz+D+wXgwQ==}
+    dev: false

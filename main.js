@@ -26,9 +26,9 @@ let _ = auto({
     adds: _ => _.elms.forEach(elm => _.root.append(elm)),
 
     steps: [
-        { el: '#app1', name: 'karl' },
-        { el: '#app2', name: 'james' },
-        { el: '#app3', name: 'james' }],
+        { target: '#app1', name: 'karl' },
+        { target: '#app2', name: 'james' },
+        { target: '#app3', name: 'james' }],
 
     el: (_) => document.querySelector(_.target),
     e0: (_) => document.createElement("h1"),
@@ -61,8 +61,9 @@ let step = 0;
 let loop = () =>
 {
     setTimeout(() => {
-        _.name = _.steps[step].name;
-        _.target = _.steps[step].el;
+        Object.keys(_.steps[step]).forEach( key => {
+            _[key] = _.steps[step][key];
+        })
         step += 1; if (step>_.steps.length-1) step = 0;
         setTimeout(loop, 1000);
     })

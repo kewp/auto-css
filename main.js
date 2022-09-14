@@ -10,20 +10,29 @@ let _ = auto({
 
     ids: ['app1','app2','app3'],
 
-    elms: _ => _.ids.map(id => {
-        let div = document.createElement('div');
-        let p = document.createElement('p');
-        let tx = document.createTextNode(id);
-        p.appendChild(tx);
-        div.append(p);
-        let inner = document.createElement('div');
-        inner.id = id;
-        div.append(inner);
+    // divs: _ => _.ids.map(id => document.createElement('div')),
 
-        return div;
-    }),
+    // elms: _ => _.ids.map(id =>
+    //     <div>
+    //         <p>{id}</p>
+    //         <div id={id}></div>
+    //     </div>
+    // ),
 
-    adds: _ => _.elms.forEach(elm => _.root.append(elm)),
+    elms: _ => _.ids.map(id => auto({
+
+        dv: document.createElement('div'),
+        in: document.createElement('div'),
+        pp: document.createElement('p'),
+        tx: document.createTextNode(id),
+
+        pa: _ => _.pp.appendChild(_.tx),
+        da: _ => _.dv.append(_.pp),
+        ia: _ => _.in.setAttribute('id',id),
+        db: _ => _.dv.append(_.in),
+    })),
+
+    adds: _ => _.elms.forEach(elm => _.root.append(elm.dv)),
 
     steps: [
         { target: '#app1', name: 'karl' },

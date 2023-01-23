@@ -46,6 +46,67 @@ tool. perhaps you could build it out
 using auto to wrap the rules you want
 to enforce.
 
+---
+
+i mean one approach to why use this library
+really is "well at least this way
+you understand what is happening!
+yes it's overkill - but you can see it.
+you can't see how all the different
+css rules interact. you just can't.
+go take a look at the actual code
+which determines the width of an element..."
+
+it's ... really interesting, and i think
+may be the right approach. we need to
+let people figure this shit out.
+why can't developers decide for themselves
+how things should be drawn? css ... css
+is this kind of hand-holding thing, because
+most people apparently are too stupid
+to write the code that decides where things
+should be placed.
+
+i think css started as this one problem,
+flow - you don't want to calculate
+when to move something to the next line.
+like in a newspaper.
+but that's not what we're doing anymore.
+we don't use flow, except for text.
+no - we have headers and side bars.
+we have borders and padding. we have
+centered sections.
+
+and i really (really) like the idea
+that you write the element,
+style it with _visual_ things like
+a shadow or border or background
+(or icon) and then the layout is
+determined by code! i mean, that
+is a real separation - you point
+to a particular element and say
+"this should be between this and
+that".
+
+> is that not what css does?
+
+no - css is a bunch of algorithms
+decided by some mysterious group
+of strangers who have all decided
+this is the way to write layout code.
+
+instead why not write the code
+yourself. or even better, search
+stack overflow or whatever for
+"how do i center something horizontally"
+and the answer isn't "you say this
+incantation and pray for the best.
+if it doesn't work, oh well that sucks
+for you, really. hire a front-end
+guy".
+
+no! no more, this sucks!
+
 ## old readme
 
 - part / window / block / square

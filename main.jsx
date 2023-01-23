@@ -1,5 +1,11 @@
 import auto from '@autolib/auto';
 
+let Book = id =>
+    <div>
+        <p>{id}</p>
+        <div id={id}></div>
+    </div>;
+
 let _ = auto({
 
     name: 'karl',
@@ -12,12 +18,7 @@ let _ = auto({
 
     // divs: _ => _.ids.map(id => document.createElement('div')),
 
-    elms: _ => _.ids.map(id =>
-        <div>
-            <p>{id}</p>
-            <div id={id}></div>
-        </div>
-    ),
+    // elms: _ => _.ids.map(id => <Book id={id} />),
 
     elms: _ => _.ids.map(id => auto({
 

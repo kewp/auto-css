@@ -5,10 +5,10 @@ var acorn = require("acorn");
 var jsx = require("acorn-jsx");
 var walk = require('estree-walker').walk;
 
-let code = `let x = name =>
+let code = `let x = (id,name) =>
   <div>
-    <p>hello</p>
-    <p>{name}</p>
+    <p>hello {name}</p>
+    <div id={id}></div>
   </div>;`
 
 // let code = "my(<jsx/>, 'code');"
@@ -34,4 +34,7 @@ var formattedCode = astring.generate(ast, { generator });
 
 // console.log(JSON.stringify(ast, null, 4));
 
+console.log()
+console.log(code);
+console.log();
 console.log(formattedCode);

@@ -9,7 +9,8 @@ var generator = Object.assign({}, astring.GENERATOR, {
     let close = false;
     if (!state.first)
     {
-      state.write('auto({\n');
+      state.write('{\n');
+      // state.write('auto({\n');
       
       close = true;
     }
@@ -27,7 +28,8 @@ var generator = Object.assign({}, astring.GENERATOR, {
       // state.write('</');
       this[node.closingElement.type](node.closingElement, state);
       // state.write('>');
-      if (close) state.write('\n})');
+      // if (close) state.write('\n})');
+      if (close) state.write('\n}');
     } else {
       
       // state.write(' />');
@@ -36,6 +38,19 @@ var generator = Object.assign({}, astring.GENERATOR, {
 
   JSXText: function JSXText(node, state)
   {
+    let value = node.value.replace(/\s/g, ""); // remove whitespace
+    if (value == '') return;
+ 
+    if (!('count' in state)) state.count = {};
+    if (!('txt' in state.count)) state.count.txt = 0;
+
+    // how to store the name
+    let tag = `txt_${state.count.txt}`;
+    state.count.txt += 1;
+
+    if (state.first) state.write(`\n`)
+    state.write(`  ${tag}: document.createTextNode('${node.value}')`);
+
   },
 
   // <div>
@@ -48,9 +63,11 @@ var generator = Object.assign({}, astring.GENERATOR, {
     while (tag.length<3) tag += 'x';
     if (!('count' in state)) state.count = {};
     if (!(tag in state.count)) state.count[tag] = 0;
+    let fullname = `${tag}_${state.count[tag]}`;
 
     if (state.first) state.write(',\n');
-    state.write(`  ${tag}_${state.count[tag]}: document.createElement(${name})`);
+    state.write(`  ${fullname}: document.createElement(${name})`);
+    state.current_element = fullname;
 
     state.count[tag] += 1;
 
@@ -96,9 +113,11 @@ var generator = Object.assign({}, astring.GENERATOR, {
 
   // {expression}
   JSXExpressionContainer: function JSXExpressionContainer(node, state) {
-    state.write('{');
+    state.write(`,\n  exp_0: $ => $.${state.current_element}.setText(`);
+    // state.write('{');
     this[node.expression.type](node.expression, state);
-    state.write('}');
+    // state.write('}');
+    state.write(`)`);
   },
 });
 
